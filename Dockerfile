@@ -2,6 +2,11 @@ FROM php:5-apache
 RUN apt-get update
 RUN apt-get install -y git
 RUN apt-get install -y zip
+RUN apt-get install -y php5-pgsql
+RUN apt-get install -y libpq-dev \
+    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-install pdo pdo_pgsql pgsql
+
 
 WORKDIR /var/www/html
 RUN mkdir api
