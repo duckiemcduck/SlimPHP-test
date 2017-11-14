@@ -1,6 +1,11 @@
 <?php
-function openConnection($database_name = 'smartifsc', $exit = TRUE) {
-    $connection = pg_connect("host=labsmart.ifsc.edu.br port=5432 dbname=$database_name user=smartifsc_website password=51KTrPq3205 connect_timeout=1");
+function openConnection($database_name = "smartifsc", $exit = TRUE) {
+	$database_name=getenv("DB_NAME",true);
+	$host_name=getenv("DB_HOST",true);
+	$port=getenv("DB_PORT",true);
+	$user_name=getenv("DB_USR",true);
+	$pw=getenv("DB_PASS",true);
+    $connection = pg_connect("host=$host_name port=$port dbname='$database_name' user=$user_name password=$pw connect_timeout=1");
     if ($connection) {
         return $connection;
     }

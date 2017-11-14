@@ -12,8 +12,13 @@ $app->get('/hello/{name}', function (Request $request, Response $response) {
 
     return $response;
 });
-$app->get('/graph/{local}/{day}-{year}-{month}', function (Request $request, Response $response) {
+$app->get('/graph/{local}/{year}-{month}-{day}', function (Request $request, Response $response) {
+	$year = $request->getAttribute("year");
+	$day = $request->getAttribute("day");
+	$month = $request->getAttribute("month");
+	$local = $request->getAttribute("local");
 	require '../controller/historico_de_consumo_mes.php';
+	return $newResponse;
 });
 $app->run();
 ?>
