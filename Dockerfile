@@ -1,10 +1,8 @@
-FROM php:5-apache
-RUN apt-get update
-RUN apt-get install -y git
-RUN apt-get install -y zip
-RUN apt-get install -y php5-pgsql
-RUN apt-get install -y postgresql
-RUN apt-get install -y libpq-dev \
+FROM php:7-apache
+RUN apt-get -qq update \ 
+    && apt-get install -y git \ 
+    && apt-get install -y zip \
+    && apt-get install -y libpq-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pdo pdo_pgsql pgsql
 
